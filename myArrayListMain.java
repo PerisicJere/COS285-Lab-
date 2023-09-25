@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 /*
  * CLASS FractionMain
@@ -8,99 +9,88 @@ import java.util.Arrays;
  * @version 20230917
  */
 public class myArrayListMain {
-
+	/*
+	 *@author Jere Perisic
+	 * Testing myArrayList.java
+	 *
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-//		Fraction[] fractionArray = new Fraction[100];
 
-//		for(int i=0; i<fractionArray.length; i++)
-//			fractionArray[i] = new Fraction(i, i+1);
-
-		System.out.println("Lab 1M - Custom Array Lists");
-		//testAdd(null, 1,2);
-
+		testAdd();
+		testIndexOf();
 		testRemove();
-		System.out.println("\n*****END OF TESTS*****");
+		testCapacity(61);
+
+
 	}
 
-	//=============TESTS================================================//
-
-
-	/* testAdd
-	 * Test that .add() actually adds a fraction object to the array
-	 * @param testArr Input array to test the add method
-	 * @param inNumA Desired Fraction A numerator
-	 * @param inDenA Desired Fraction A denominator
+	/*
+	 * Tests the add method of myArrayList.
 	 */
 	public static void testAdd() {
-
-
-		System.out.println("\n===========================================");
-		System.out.println(".add() TEST");
-
-		System.out.println("\n===========================================");
+		System.out.println("Testing add method.");
+		myArrayList list = new myArrayList();
+		for (int i = 0; i < 10; i++) {
+			Fraction fraction = new Fraction(i, i + 2);
+			list.add(list.getSize(), fraction);
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println("\n" + "Add successful");
+		System.out.println(list.getCapacity() + "\n");
 	}
 
-	/* testRemove
-	 * Test that .remove() actually removes a fraction object from the array
+	/*
+	 * Tests the indexOf method of myArrayList.
+	 */
+	public static void testIndexOf() {
+		System.out.println("Testing IndexOf");
+		myArrayList list = new myArrayList();
+
+		Fraction fra1 = new Fraction(1, 2);
+		Fraction fra2 = new Fraction(3, 4);
+		list.add(0, fra1);
+		list.add(1, fra2);
+		int index = list.indexOf(fra2);
+		System.out.println("Fra2: " + index);
+		int nonExistingIndex = list.indexOf(new Fraction(2, 3));
+		System.out.println("Non existing index: " + nonExistingIndex);
+		System.out.println("Index of testing done" + "\n");
+	}
+
+	/*
+	 * Tests the remove method of myArrayList.
 	 */
 	public static void testRemove() {
+		System.out.println("Testing remove");
+		myArrayList list = new myArrayList();
 
-		myArrayList<Fraction> removeTestArray = new myArrayList<>();
-		removeTestArray.add(new Fraction(1,2));
-		removeTestArray.add(new Fraction(3,8));
-		System.out.println(printArray(removeTestArray));
+		Fraction fra1 = new Fraction(1, 2);
+		Fraction fra2 = new Fraction(3, 4);
 
+		list.add(0, fra1);
+		list.add(1, fra2);
 
-		System.out.println("\n===========================================");
-		System.out.println(".remove() TEST");
-		System.out.println("\nThe array initially has the following elements: " + printArray(removeTestArray));
-		System.out.println("Removing the first entry:");
-		removeTestArray.remove(0);
-		System.out.println("The array now has the following elements: " + printArray(removeTestArray));
+		Fraction removed = list.remove(0);
 
-		System.out.println("Adding a few new fractions to the array...");
-		removeTestArray.add(new Fraction(4,5));
-		removeTestArray.add(new Fraction(99,100));
-		System.out.println("The array now has the following elements: " + printArray(removeTestArray));
-		System.out.println("Removing the last entry...");
-		removeTestArray.remove(2);
-		System.out.println("The array now has the following elements: " + printArray(removeTestArray));
+		assert removed.equals(fra1);
 
-		System.out.println("\nEND OF .remove() TEST");
-
-		System.out.println("\n===========================================");
+		assert list.getSize() == 1;
 	}
-
-	/* testContains
-	 * Test that .contains() actually determines whether or not the array contains
-	 * the specified Fraction object
-	 * @param testArr Input array to test the contains method
-	 * @param inNumA Desired Fraction A numerator
-	 * @param inDenA Desired Fraction A denominator
+	/*
+	 * Tests the capacity increase of myArrayList.
+	 *
+	 * @param n The number of fractions to add for testing capacity increase.
 	 */
-	public static void testContains(myArrayList[] testArr, int inNumA, int inDenA) {
-		int testNumA = inNumA;
-		int testDenA = inDenA;
-		Fraction testFracA = new Fraction(testNumA,testDenA);
 
+	public static void testCapacity(int n) {
+		System.out.println("Testing capacity increase");
+		myArrayList list = new myArrayList();
 
-		System.out.println("\n===========================================");
-		System.out.println(".contains() TEST");
-
-		System.out.println("\n===========================================");
-	}
-
-	public static String printArray(myArrayList fractions) {
-		String arrayString = "[";
-		for (int i = 0; i < fractions.getSize(); i++){
-			if(i!= fractions.getSize()-1)
-				arrayString +=fractions.get(i).toPrint() + ", ";
-			else
-				arrayString += fractions.get(i).toPrint();
-
+		System.out.println("Initial capacity:" + list.getCapacity());
+		for (int i = 0; i < n; i++) {
+			list.add(i, new Fraction(i, i + 1));
 		}
-		arrayString += "]";
-		return arrayString;
+		System.out.println("Increased capacity: " + list.getCapacity());
+
 	}
 }
