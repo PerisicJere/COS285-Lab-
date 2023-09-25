@@ -4,19 +4,14 @@
  *
  * @author Ben Sweeney, Jere Perisic, Abby Pitcairn, Esther Mugish
  *
- * @version 20230917
+ * @version 20230924
  *
  */
 
 import java.util.Arrays;
-
-//public class myArrayList<T extends Fraction> {
 public class myArrayList<T extends Fraction>{
 	private Fraction[] fractions;
 	private int size;
-
-
-
 	private int capacity  ;
 	private double Growth_factor = 0.2;
 
@@ -32,7 +27,6 @@ public class myArrayList<T extends Fraction>{
 	 *
 	 * @param index The spot we're inserting a new fraction into
 	 * @param inFrac new Fraction to append to the arraylist
-	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
 	public void add(int index, Fraction inFrac) {
 		if (index < 0 || index > size){
@@ -56,14 +50,12 @@ public class myArrayList<T extends Fraction>{
 	 * Add a Fraction to the end of an ArrayList
 	 *
 	 * @param inFrac new Fraction to append to the arraylist
-	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
 	public void add(Fraction inFrac) {
 		if (size == capacity) {
 			int newCap = (int) (capacity+capacity*Growth_factor);
 			fractions = Arrays.copyOf(fractions, newCap);
 			capacity = newCap;
-
 		}
 		fractions[size]=inFrac;
 		size++;
@@ -95,9 +87,9 @@ public class myArrayList<T extends Fraction>{
 	 * @param checkFrac Specified Fraction to find in the arraylist
 	 * @return False if the Fraction was not found, true if the Fraction was found
 	 */
-	public boolean contains(Fraction checkFrac) {
-		return false;
-	}
+//	public boolean contains(Fraction checkFrac) {
+//		return false;
+//	}
 
 	public Fraction get(int index){
 		if (index < 0 || index >= size){
@@ -125,8 +117,6 @@ public class myArrayList<T extends Fraction>{
 			if (fractions[i].equals(input))
 				index = i;   }
 		return index;
-
-
 	}
 }
 

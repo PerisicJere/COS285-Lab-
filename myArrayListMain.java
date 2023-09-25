@@ -6,7 +6,7 @@ import java.util.Random;
  * Test and output the results from operations on custom Fraction ArrayList objects
  * @author Ben Sweeney, Abby Pitcairn, Jere Perisic, Esther Mugish
  *
- * @version 20230917
+ * @version 20230924
  */
 public class myArrayListMain {
 	/*
